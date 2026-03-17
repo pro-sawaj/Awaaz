@@ -92,6 +92,31 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Welcome Button Styling */
+        #welcome-btn {
+            display: none; /* Starting mein hide rahega */
+            margin: 0 auto 20px auto;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-family: inherit;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+            border: 2px solid #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            font-weight: 600;
+        }
+
+        #welcome-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
         /* Text Styling */
         .brand-name {
             color: #fff;
@@ -114,9 +139,12 @@
     </div>
 
     <div class="ui-wrapper">
-        <div class="loader-hub">
+        <div class="loader-hub" id="loader">
             <div class="neon-spinner"></div>
         </div>
+        
+        <button id="welcome-btn">Welcome</button>
+
         <h1 class="brand-name">Awaaz Ecosystem</h1>
     </div>
 
@@ -124,24 +152,31 @@
         document.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById('bg-container');
             const bgImg = document.getElementById('dynamic-bg');
+            const loaderHub = document.getElementById('loader');
+            const welcomeBtn = document.getElementById('welcome-btn');
             
             // Random Seed taaki har baar nayi photo aaye
             const seed = Math.floor(Math.random() * 1000);
-            // Grayscale hata diya hai taaki photo bilkul saaf aur colorful dikhe
             const highResUrl = `https://picsum.photos/1920/1080?sig=${seed}`;
 
             // Image pre-loading logic: Jab photo fully load ho jaye tabhi dikhe
-            const loader = new Image();
-            loader.src = highResUrl;
-            loader.onload = () => {
+            const imageLoader = new Image();
+            imageLoader.src = highResUrl;
+            
+            imageLoader.onload = () => {
+                // Photo dikhao
                 bgImg.src = highResUrl;
                 container.style.opacity = "1"; // Smooth fade-in
+
+                // Spinner hatao aur Welcome Button dikhao
+                loaderHub.style.display = "none";
+                welcomeBtn.style.display = "block";
             };
 
-            // 4 Seconds ke baad redirect
-            setTimeout(() => {
+            // Jab koi welcome button dabayega, tabhi home.html load hoga
+            welcomeBtn.addEventListener("click", () => {
                 window.location.href = 'home.html';
-            }, 4000);
+            });
         });
     </script>
 </body>
