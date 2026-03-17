@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awaaz Ecosystem | Premium Clean</title>
+    <style>
+        /* CSS Reset aur Base Styling */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-color: #000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* BACKGROUND ENGINE - Clean aur Saaf Look ke liye */
+        #bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0; /* JS se load hone par 1 hoga */
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        #dynamic-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Filter ko clean rakha hai taaki photo dhundli na dikhe */
+            filter: brightness(0.6) contrast(1.1); 
+            transform: scale(1);
+            animation: slowZoom 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Soft Cinema Overlay - Photo ki details ko preserve karta hai */
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
+
+        /* UI ELEMENTS */
+        .ui-wrapper {
+            position: absolute;
+            bottom: 10%; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Elegant Loader */
+        .loader-hub {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .neon-spinner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #FF3B30, #FF9500, #FFFFFF, #4CD964, #007AFF, #FF3B30
+            );
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+            animation: hyperSpin 0.8s linear infinite;
+        }
+
+        @keyframes hyperSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Text Styling */
+        .brand-name {
+            color: #fff;
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            background: linear-gradient(to bottom, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container">
+        <div class="vignette"></div>
+        <img id="dynamic-bg" src="" alt="Premium Background">
+    </div>
+
+    <div class="ui-wrapper">
+        <div class="loader-hub">
+            <div class="neon-spinner"></div>
+        </div>
+        <h1 class="brand-name">Awaaz Ecosystem</h1>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById('bg-container');
+            const bgImg = document.getElementById('dynamic-bg');
+            
+            // Random Seed taaki har baar nayi photo aaye
+            const seed = Math.floor(Math.random() * 1000);
+            // Grayscale hata diya hai taaki photo bilkul saaf aur colorful dikhe
+            const highResUrl = `https://picsum.photos/1920/1080?sig=${seed}`;
+
+            // Image pre-loading logic: Jab photo fully load ho jaye tabhi dikhe
+            const loader = new Image();
+            loader.src = highResUrl;
+            loader.onload = () => {
+                bgImg.src = highResUrl;
+                container.style.opacity = "1"; // Smooth fade-in
+            };
+
+            // 4 Seconds ke baad redirect
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
