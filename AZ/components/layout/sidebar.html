@@ -1,11 +1,8 @@
 <style>
     /* --- SIDEBAR KI CSS --- */
-    /* Background ka black transparent hissa */
     .sidebar-overlay { position: fixed; top: 85px; left: 0; width: 100vw; height: calc(100vh - 85px); background: rgba(0, 0, 0, 0.4); opacity: 0; transition: opacity 0.3s ease; display: flex; justify-content: flex-end; pointer-events: none; z-index: 9000; }
-    /* White wala main panel jo bahar se andar aata hai */
     .sidebar-panel { width: 280px; max-width: 80vw; height: 100%; background: #ffffff; box-shadow: -5px 0 25px rgba(0,0,0,0.1); transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); display: flex; flex-direction: column; }
     
-    /* Links aur Buttons ki design */
     .menu-link { text-decoration: none; color: #475569; font-weight: 700; font-size: 14px; padding: 12px 16px; border-radius: 10px; display: flex; align-items: center; gap: 12px; }
     .theme-btn-main { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: transparent; border: none; font-size: 14px; font-weight: 700; color: #475569; cursor: pointer; border-radius: 10px; }
     .theme-option-btn { padding: 10px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; gap: 10px; align-items: center; border: 1px solid transparent; }
@@ -45,39 +42,109 @@
 </div>
 
 <script>
-    // --- SIDEBAR KI JAVASCRIPT ---
-
-    // Sidebar ko wapas band karne ka function
+    // ==========================================
+    // SIDEBAR UI LOGIC
+    // ==========================================
     window.closePop = function() {
         const overlay = document.querySelector('.sidebar-overlay');
         const panel = document.querySelector('.sidebar-panel');
-        if (overlay) overlay.style.opacity = '0'; // Black background hatao
-        if (panel) panel.style.transform = 'translateX(100%)'; // Panel wapas hide kardo
+        if (overlay) overlay.style.opacity = '0';
+        if (panel) panel.style.transform = 'translateX(100%)';
         setTimeout(() => { if (overlay) overlay.style.pointerEvents = 'none'; }, 300);
     };
 
-    // Dark/Light mode wale dropdown ko open/close karne ka function
     window.toggleThemeMenu = function() {
         const menu = document.getElementById('theme-options');
         const icon = document.getElementById('theme-icon');
         if (menu && (menu.style.display === 'none' || menu.style.display === '')) {
-            menu.style.display = 'flex'; // Menu dikhao
-            icon.style.transform = 'rotate(180deg)'; // Arrow ko upar ghumao
+            menu.style.display = 'flex';
+            icon.style.transform = 'rotate(180deg)';
         } else if (menu) {
-            menu.style.display = 'none'; // Menu chhupao
-            icon.style.transform = 'rotate(0deg)'; // Arrow wapas seedha karo
+            menu.style.display = 'none';
+            icon.style.transform = 'rotate(0deg)';
         }
     };
 
-    // Theme Set karne ka function
     window.setTheme = function(mode) {
         if (mode === 'dark') {
-            document.body.classList.add('dark-mode'); // CSS class add karo
-            localStorage.setItem('theme', 'dark'); // Browser memory mein save karo
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
         } else {
-            document.body.classList.remove('dark-mode'); // CSS class hatao
-            localStorage.setItem('theme', 'light'); // Browser memory mein save karo
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
         }
-        closePop(); // Theme badalte hi sidebar band kardo
+        closePop();
+    };
+
+    // ==========================================
+    // PRODUCTION-READY SPA ROUTER (COMPONENT LOADER)
+    // ==========================================
+    
+    // Memory leak rokne ke liye previous state track karega
+    window.activeComponentCSS = null;
+    window.activeComponentJS = null;
+
+    window.loadComponent = async function(targetId, filePath) {
+        const targetElement = document.getElementById(targetId);
+        if (!targetElement) {
+            console.error(`[Router Error] Target element '#${targetId}' nahi mila.`);
+            return;
+        }
+
+        // URL se folder path nikalna (e.g. './components/account/')
+        const folderPath = filePath.substring(0, filePath.lastIndexOf('/') + 1);
+
+        try {
+            // 1. HTML Fetch karein
+            const htmlResponse = await fetch(filePath);
+            if (!htmlResponse.ok) throw new Error(`HTML File not found at: ${filePath}`);
+            targetElement.innerHTML = await htmlResponse.text();
+
+            // 2. Old Component ki Safai (Cleanup CSS & JS)
+            if (window.activeComponentCSS) window.activeComponentCSS.remove();
+            if (window.activeComponentJS) window.activeComponentJS.remove();
+
+            // 3. Nayi CSS Load karein (Silent fail agar CSS exist na kare)
+            try {
+                const cssResponse = await fetch(folderPath + 'style.css');
+                if (cssResponse.ok) {
+                    const cssText = await cssResponse.text();
+                    const styleElement = document.createElement('style');
+                    styleElement.innerHTML = cssText;
+                    document.head.appendChild(styleElement);
+                    window.activeComponentCSS = styleElement; // Track for next cleanup
+                }
+            } catch (err) { /* No CSS file found, silent ignore */ }
+
+            // 4. Nayi JS Load karein (Scope Isolation ke sath)
+            try {
+                const jsResponse = await fetch(folderPath + 'script.js');
+                if (jsResponse.ok) {
+                    const jsText = await jsResponse.text();
+                    const scriptElement = document.createElement('script');
+                    
+                    // JS ko ek function ke andar wrap kar rahe hain taaki global variables overlap na ho
+                    scriptElement.innerHTML = `
+                        (function() {
+                            try {
+                                ${jsText}
+                            } catch (err) {
+                                console.error('[Component JS Error] in ${folderPath}:', err);
+                            }
+                        })();
+                    `;
+                    document.body.appendChild(scriptElement);
+                    window.activeComponentJS = scriptElement; // Track for next cleanup
+                }
+            } catch (err) { /* No JS file found, silent ignore */ }
+
+        } catch (error) {
+            console.error('[Router Error]:', error.message);
+            targetElement.innerHTML = `
+                <div style="padding: 2rem; color: #ef4444; text-align: center; font-family: sans-serif;">
+                    <h2>404 - Page Load Failed</h2>
+                    <p>Path: <code>${filePath}</code></p>
+                </div>`;
+        }
     };
 </script>
