@@ -89,19 +89,15 @@
         }
     };
 
-    // 3. My Profile pe click handle karne ka safe function
+    // 3. My Profile pe click handle karne ka safe function (UPDATE KIYA GAYA HAI)
     window.handleProfileClick = function() {
         try {
-            // Agar loadComponent function bani hui hai tabhi chalega, error nahi aayega
-            if (typeof loadComponent === 'function') {
-                loadComponent('main-root', './components/account/index.html');
-            } else {
-                console.warn("loadComponent function exist nahi karti!");
-            }
+            // Puraana code hatakar ab seedha naya page load karwaya jaa raha hai
+            window.location.href = './components/account/index.html';
         } catch(err) {
-            console.error(err);
+            console.error("Page load karne mein error aayi:", err);
         }
-        closePop(); // Function chalne ke baad sidebar close ho jayega
+        closePop(); // Function chalne ke baad sidebar automatically close ho jayega
     };
 
     // 4. Dark/Light mode wale dropdown ko open/close karne ka function
