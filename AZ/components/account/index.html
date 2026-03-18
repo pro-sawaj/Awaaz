@@ -5,10 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Awaaz Global - Premium Auth</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ================= ULTRA PREMIUM THEME ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); color: #1e293b; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { width: 100%; max-width: 440px; animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 24px; padding: 35px 30px; box-shadow: 0 20px 40px rgba(24, 119, 242, 0.08), 0 1px 3px rgba(0,0,0,0.05); border: 1px solid rgba(255, 255, 255, 0.8); position: relative; overflow: hidden; }
+        .card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #1877f2, #0ea5e9); }
+        .brand-logo { display: block; margin: 0 auto 15px auto; width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 3px solid #e2e8f0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); background: #fff; }
+        h2 { color: #0f172a; text-align: center; margin-bottom: 25px; font-weight: 800; font-size: 26px; letter-spacing: -0.5px;}
+        .input-group { position: relative; margin-bottom: 18px; }
+        .input-group i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 16px; transition: 0.3s; }
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"] { width: 100%; padding: 15px 15px 15px 48px; border: 2px solid #e2e8f0; border-radius: 14px; outline: none; font-size: 14px; font-weight: 500; transition: all 0.3s; background: #f8fafc; color: #0f172a; }
+        input:focus { border-color: #1877f2; background: #ffffff; box-shadow: 0 4px 12px rgba(24, 119, 242, 0.1); }
+        input:focus + i, input:focus ~ i { color: #1877f2; }
+        .gender-box { display: flex; gap: 12px; margin-bottom: 20px; }
+        .gender-option { flex: 1; text-align: center; padding: 12px; border: 2px solid #e2e8f0; border-radius: 14px; cursor: pointer; color: #64748b; font-weight: 600; font-size: 14px; transition: 0.3s; background: #f8fafc; display: flex; align-items: center; justify-content: center; gap: 8px;}
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .gender-option { border-color: #1877f2; background: #eff6ff; color: #1877f2; box-shadow: 0 4px 10px rgba(24, 119, 242, 0.1);}
+        .btn-primary { width: 100%; padding: 16px; background: linear-gradient(135deg, #1877f2, #1d4ed8); color: #ffffff; border: none; border-radius: 14px; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 8px 20px rgba(24, 119, 242, 0.25); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(24, 119, 242, 0.35); }
+        .btn-google { width: 100%; padding: 15px; background: #ffffff; color: #334155; border: 2px solid #e2e8f0; border-radius: 14px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; transition: 0.3s; }
+        .btn-google:hover { background: #f1f5f9; border-color: #cbd5e1; transform: translateY(-1px); }
+        .btn-google img { width: 22px; }
+        .divider { text-align: center; margin: 20px 0; color: #94a3b8; font-size: 13px; font-weight: 500; position: relative; }
+        .divider::before, .divider::after { content: ""; position: absolute; top: 50%; width: 38%; height: 1.5px; background: #f1f5f9; }
+        .divider::before { left: 0; } .divider::after { right: 0; }
+        .link { color: #1877f2; text-align: center; cursor: pointer; font-size: 13px; font-weight: 600; display: block; margin-top: 18px; transition: 0.3s;}
+        .link:hover { color: #1d4ed8; text-decoration: underline; }
+        .forgot-pass { text-align: right; margin-top: -10px; margin-bottom: 20px; display: block; font-size: 12px; }
+        .hidden { display: none !important; }
+        #profileSection { padding: 0; overflow: hidden; }
+        .cover-photo { width: 100%; height: 140px; background: linear-gradient(135deg, #0f172a, #1e293b); background-size: cover; background-position: center; position: relative; transition: background 0.3s; }
+        .cover-photo::after { content: "👑 VIP MEMBER"; position: absolute; top: 15px; right: 15px; background: rgba(255,215,0,0.2); color: #ffd700; border: 1px solid #ffd700; font-size: 9px; font-weight: 800; padding: 4px 10px; border-radius: 20px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .cover-edit-btn { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.5); color: white; font-size: 10px; font-weight: 600; padding: 6px 12px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 5px; z-index: 10; }
+        .cover-edit-btn:hover { background: rgba(0,0,0,0.8); border-color: white; }
+        .profile-content { padding: 0 20px 20px; margin-top: -55px; text-align: center; }
+        .avatar-wrapper { position: relative; width: 110px; height: 110px; margin: 0 auto 10px; z-index: 2; }
+        .avatar-wrapper img { width: 100%; height: 100%; border-radius: 50%; border: 4px solid #ffffff; object-fit: cover; box-shadow: 0 8px 20px rgba(0,0,0,0.15); background: #fff;}
+        .upload-btn { position: absolute; bottom: 5px; right: 0; background: #1877f2; color: white; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 3px solid white; transition: 0.3s; font-size: 14px; box-shadow: 0 4px 10px rgba(24,119,242,0.3);}
+        .upload-btn:hover { transform: scale(1.1); background: #1d4ed8; }
+        .profile-content h3 { color: #0f172a; font-size: 22px; font-weight: 800; margin-bottom: 2px;}
+        .profile-content h3 span { font-size: 14px; color: #10b981; margin-left: 5px; vertical-align: middle; }
+        .profile-content p.email-text { color: #64748b; font-size: 13px; font-weight: 500; margin-bottom: 15px; }
+        .profile-stats { display: flex; gap: 12px; margin-bottom: 15px; }
+        .stat-box { flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; text-align: center; transition: 0.3s;}
+        .stat-box h4 { color: #1877f2; font-size: 16px; font-weight: 800; }
+        .stat-box span { color: #64748b; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
+        .tab-menu { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 15px; scrollbar-width: none; }
+        .tab-menu::-webkit-scrollbar { display: none; }
+        .tab-btn { flex-shrink: 0; padding: 8px 16px; background: #f1f5f9; border: 1px solid #e2e8f0; color: #64748b; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .tab-btn.active { background: #1877f2; color: #fff; border-color: #1877f2; box-shadow: 0 4px 10px rgba(24,119,242,0.3); }
+        .tab-content { display: none; animation: fadeInTab 0.4s ease; text-align: left; }
+        .tab-content.active { display: block; }
+        @keyframes fadeInTab { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .info-list { background: #ffffff; border-radius: 16px; padding: 5px 15px; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.02); margin-bottom: 15px; }
+        .info-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #64748b; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .info-label i { color: #1877f2; width: 16px; text-align: center; font-size: 15px; }
+        .info-value { color: #0f172a; font-weight: 700; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: 0.2s; max-width: 55%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+        .info-value:hover { background: #f1f5f9; color: #1877f2; }
+        .info-value.empty { color: #1877f2; border: 1px dashed #cbd5e1; }
+        .badge-verified { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800;}
+        .social-row { display: flex; justify-content: center; gap: 15px; padding: 15px 0; flex-wrap: wrap; }
+        .social-circle { width: 55px; height: 55px; border-radius: 50%; background: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; transition: 0.3s; position: relative; }
+        .social-circle:hover { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .social-web i { color: #0ea5e9; } .social-fb i { color: #1877F2; } .social-ig i { background: -webkit-linear-gradient(#f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } .social-tw i { color: #0f172a; } .social-tg i { color: #0088cc; }
+        .added-badge { position: absolute; top: -2px; right: -2px; background: #10b981; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; opacity: 0; transition: 0.3s; }
+        .social-circle.has-data { border-color: #10b981; background: #ecfdf5; }
+        .social-circle.has-data .added-badge { opacity: 1; }
+        .section-desc { font-size: 11px; color: #94a3b8; font-weight: 600; text-align: center; margin-bottom: 5px; }
+        #loader { position: fixed; inset: 0; background: rgba(255,255,255,0.95); display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 9999; backdrop-filter: blur(5px);}
+        .spinner { border: 4px solid #f1f5f9; border-top: 4px solid #1877f2; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        #loader-text { color: #0f172a; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; }
+        #toast { visibility: hidden; min-width: 250px; background-color: #1e293b; color: #fff; text-align: center; border-radius: 12px; padding: 16px; position: fixed; z-index: 10000; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 13px; font-weight: 600; box-shadow: 0 10px 25px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.3s, bottom 0.3s; display: flex; align-items: center; gap: 10px; justify-content: center;}
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+        #toast.success { background-color: #10b981; border: 1px solid #059669; }
+        #toast.error { background-color: #ef4444; border: 1px solid #dc2626; }
+        .custom-modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .custom-modal-overlay.show { opacity: 1; visibility: visible; }
+        .custom-modal-box { background: #fff; border-radius: 20px; width: 90%; max-width: 350px; padding: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transform: translateY(20px) scale(0.95); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .custom-modal-overlay.show .custom-modal-box { transform: translateY(0) scale(1); }
+        .custom-modal-box h3 { color: #0f172a; font-size: 18px; font-weight: 800; margin-bottom: 15px; }
+        .custom-modal-input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: 0.3s; background: #f8fafc; color: #0f172a; margin-bottom: 20px;}
+        .custom-modal-input:focus { border-color: #1877f2; background: #fff; box-shadow: 0 0 0 4px rgba(24,119,242,0.1); }
+        .modal-buttons { display: flex; gap: 10px; }
+        .modal-buttons button { flex: 1; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-cancel { background: #f1f5f9; color: #64748b; }
+        .btn-cancel:hover { background: #e2e8f0; color: #0f172a; }
+        .btn-save { background: #1877f2; color: #fff; }
+        .btn-save:hover { background: #1d4ed8; }
+        .photo-action-btn { width: 100%; padding: 14px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .btn-action-upload { background: #eff6ff; color: #1877f2; border: 1px solid #bfdbfe; }
+        .btn-action-upload:hover { background: #1877f2; color: #fff; }
+        .btn-action-delete { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; }
+        .btn-action-delete:hover { background: #ef4444; color: #fff; }
+    </style>
 </head>
 <body>
 
@@ -153,6 +255,262 @@
 
     </div>
 
-    <script type="module" src="script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyClj4YnXzEg_xVm-e9ZmLm6OdEDBzt5_cw",
+            authDomain: "pro-awaaz.firebaseapp.com",
+            projectId: "pro-awaaz",
+            storageBucket: "pro-awaaz.firebasestorage.app",
+            messagingSenderId: "52821224309",
+            appId: "1:52821224309:web:32e48789d593202ad2813c"
+        };
+        const IMGBB_KEY = "6ba518a940916ac94149764f5a7b3cc0"; 
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        const show = (id) => document.getElementById(id).classList.remove('hidden');
+        const hide = (id) => document.getElementById(id).classList.add('hidden');
+        const setLoader = (text, status) => { document.getElementById('loader-text').innerText = text; document.getElementById('loader').style.display = status ? 'flex' : 'none'; };
+
+        window.showToast = (message, type = "success") => {
+            const toast = document.getElementById("toast");
+            const icon = type === "success" ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-solid fa-circle-exclamation"></i>';
+            toast.innerHTML = `${icon} <span>${message}</span>`;
+            toast.className = `show ${type}`;
+            setTimeout(() => { toast.className = toast.className.replace(`show ${type}`, ""); }, 3000);
+        };
+
+        window.switchTab = (tabId, btnElement) => {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+        };
+
+        // TEXT EDIT MODAL LOGIC
+        let currentModalResolve = null;
+        window.openCustomPrompt = (title, currentValue) => {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('customModal');
+                const input = document.getElementById('modalInput');
+                document.getElementById('modalTitle').innerText = `Enter ${title}`;
+                input.value = (currentValue === "Add +" || currentValue.includes("Yrs")) ? "" : currentValue;
+                modal.classList.add('show');
+                setTimeout(() => input.focus(), 300);
+                currentModalResolve = resolve;
+            });
+        };
+        window.closeModal = () => { document.getElementById('customModal').classList.remove('show'); if(currentModalResolve) currentModalResolve(null); };
+        document.getElementById('btnSaveModal').onclick = () => { const val = document.getElementById('modalInput').value; document.getElementById('customModal').classList.remove('show'); if(currentModalResolve) currentModalResolve(val); };
+
+        // ================= PHOTO ACTION MENU LOGIC =================
+        let currentPhotoEditType = '';
+
+        window.openPhotoMenu = (type) => {
+            currentPhotoEditType = type;
+            document.getElementById('photoActionTitle').innerText = type === 'cover' ? 'Edit Cover Photo' : 'Edit Profile Photo';
+            
+            let localData = JSON.parse(localStorage.getItem("awaaz_user_data") || "{}");
+            const hasPhoto = type === 'cover' ? (localData.coverPic && localData.coverPic !== "") : (localData.profilePic && localData.profilePic !== "");
+            
+            document.getElementById('btnActionDeletePhoto').style.display = hasPhoto ? "flex" : "none";
+            document.getElementById('photoActionModal').classList.add('show');
+        };
+
+        window.closePhotoMenu = () => { document.getElementById('photoActionModal').classList.remove('show'); };
+        window.triggerPhotoUpload = () => { document.getElementById('sharedPhotoUpload').click(); closePhotoMenu(); };
+        window.triggerPhotoDelete = () => { window.removePhoto(currentPhotoEditType); closePhotoMenu(); };
+
+        // SHARED UPLOAD FUNCTION
+        document.getElementById('sharedPhotoUpload').onchange = async (e) => {
+            const file = e.target.files[0];
+            if(!file || !auth.currentUser) return;
+            
+            const typeText = currentPhotoEditType === 'cover' ? "Cover" : "Profile";
+            setLoader(`Updating ${typeText} Photo...`, true);
+            
+            try {
+                const formData = new FormData(); formData.append("image", file);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method: "POST", body: formData });
+                const data = await res.json();
+                if(data.success) {
+                    const url = data.data.url;
+                    const dbField = currentPhotoEditType === 'cover' ? 'coverPic' : 'profilePic';
+                    
+                    await updateDoc(doc(db, "nodes", auth.currentUser.uid), { [dbField]: url });
+                    let localData = JSON.parse(localStorage.getItem("awaaz_user_data") || "{}");
+                    localData[dbField] = url;
+                    localStorage.setItem("awaaz_user_data", JSON.stringify(localData));
+                    
+                    updateProfileUI(localData, auth.currentUser.email);
+                    showToast(`${typeText} Photo Updated!`, "success");
+                }
+            } catch(err) { showToast("Upload Failed", "error"); }
+            setLoader("", false);
+            e.target.value = ""; 
+        };
+
+        // REMOVE PHOTO FUNCTION
+        window.removePhoto = async (type) => {
+            if(!auth.currentUser) return;
+            const typeText = type === 'cover' ? "Cover" : "Profile";
+            setLoader(`Removing ${typeText} photo...`, true);
+            try {
+                const dbField = type === 'profile' ? 'profilePic' : 'coverPic';
+                await updateDoc(doc(db, "nodes", auth.currentUser.uid), { [dbField]: "" });
+                
+                let localData = JSON.parse(localStorage.getItem("awaaz_user_data") || "{}");
+                localData[dbField] = "";
+                localStorage.setItem("awaaz_user_data", JSON.stringify(localData));
+                
+                updateProfileUI(localData, auth.currentUser.email);
+                showToast(`${typeText} Photo Removed!`, "success");
+            } catch (err) { showToast("Failed to remove photo", "error"); }
+            setLoader("", false);
+        };
+
+        document.getElementById('btnGoToSignup').onclick = () => { hide('loginSection'); show('signupSection'); };
+        document.getElementById('btnGoToLogin').onclick = () => { hide('signupSection'); show('loginSection'); };
+
+        const updateProfileUI = (data, email) => {
+            document.getElementById('pHeaderName').innerHTML = `${data.name || "Awaaz User"} <span><i class="fa-solid fa-circle-check"></i></span>`;
+            document.getElementById('pEmail').innerText = data.email || email;
+            document.getElementById('pGender').innerText = data.gender || "Not Set";
+            document.getElementById('pAge').innerText = data.age ? data.age + " Yrs" : "Not Set";
+            
+            const updateTextField = (id, value) => {
+                const el = document.getElementById(id);
+                if(value && value.trim() !== "") { el.innerText = value; el.classList.remove("empty"); }
+                else { el.innerText = "Add +"; el.classList.add("empty"); }
+            };
+
+            updateTextField('pPhone', data.phone);
+            updateTextField('pCity', data.city);
+            updateTextField('pPincode', data.pincode);
+            updateTextField('pAddress', data.address);
+            updateTextField('pGstin', data.gstin);
+            document.getElementById('pLang').innerText = data.lang || "English";
+
+            const updateSocialIcon = (id, value) => {
+                const el = document.getElementById(id);
+                if(value && value.trim() !== "") { el.classList.add("has-data"); }
+                else { el.classList.remove("has-data"); }
+            };
+
+            updateSocialIcon('sWebsite', data.website);
+            updateSocialIcon('sInstagram', data.instagram);
+            updateSocialIcon('sFacebook', data.facebook);
+            updateSocialIcon('sTwitter', data.twitter);
+            updateSocialIcon('sTelegram', data.telegram);
+
+            if(data.profilePic && data.profilePic !== "") { document.getElementById('userPhoto').src = data.profilePic; }
+            else { document.getElementById('userPhoto').src = "https://via.placeholder.com/150/f8fafc/94a3b8?text=VIP"; }
+
+            if(data.coverPic && data.coverPic !== "") { document.getElementById('coverPhotoBg').style.backgroundImage = `url(${data.coverPic})`; } 
+            else { document.getElementById('coverPhotoBg').style.backgroundImage = `linear-gradient(135deg, #0f172a, #1e293b)`; }
+        };
+
+        window.editField = async (dbKey, displayName) => {
+            if(!auth.currentUser) return;
+            let localData = JSON.parse(localStorage.getItem("awaaz_user_data") || "{}");
+            const currentUIValue = localData[dbKey] || "";
+            const newVal = await window.openCustomPrompt(displayName, currentUIValue);
+            
+            if (newVal !== null) { 
+                setLoader(`Saving ${displayName}...`, true);
+                try {
+                    await updateDoc(doc(db, "nodes", auth.currentUser.uid), { [dbKey]: newVal });
+                    localData[dbKey] = newVal;
+                    localStorage.setItem("awaaz_user_data", JSON.stringify(localData));
+                    updateProfileUI(localData, auth.currentUser.email);
+                    showToast(`${displayName} Updated!`, "success");
+                } catch(err) { showToast(`Failed to update ${displayName}`, "error"); }
+                setLoader("", false);
+            }
+        };
+
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault(); setLoader("Authenticating...", true);
+            try { await signInWithEmailAndPassword(auth, document.getElementById('logEmail').value, document.getElementById('logPass').value); showToast("Login Successful!", "success"); } 
+            catch (err) { showToast("Invalid Credentials. Try again.", "error"); setLoader("", false); }
+        };
+
+        document.getElementById('signupForm').onsubmit = async (e) => {
+            e.preventDefault(); setLoader("Setting up your Node...", true);
+            try {
+                const uc = await createUserWithEmailAndPassword(auth, document.getElementById('signEmail').value, document.getElementById('signPass').value);
+                const newUserData = { 
+                    name: document.getElementById('signName').value, age: document.getElementById('signAge').value,
+                    gender: document.querySelector('input[name="gender"]:checked').value, email: document.getElementById('signEmail').value, 
+                    profilePic: "", coverPic: "", phone: "", city: "", pincode: "", address: "", gstin: "", lang: "English",
+                    website: "", facebook: "", instagram: "", twitter: "", telegram: ""
+                };
+                await setDoc(doc(db, "nodes", uc.user.uid), newUserData);
+                localStorage.setItem("awaaz_user_data", JSON.stringify(newUserData));
+                showToast("Account Created Successfully!", "success");
+            } catch (err) { showToast(err.message, "error"); setLoader("", false); }
+        };
+
+        const handleGoogleAuth = async () => {
+            setLoader("Connecting to Google...", true);
+            try {
+                const res = await signInWithPopup(auth, provider);
+                const user = res.user;
+                const docSnap = await getDoc(doc(db, "nodes", user.uid));
+                if(!docSnap.exists()) {
+                    await setDoc(doc(db, "nodes", user.uid), { 
+                        name: user.displayName, email: user.email, profilePic: user.photoURL || "", coverPic: "", gender: "Not Set", age: "", 
+                        phone: "", city: "", pincode: "", address: "", gstin: "", lang: "English", website: "", facebook: "", instagram: "", twitter: "", telegram: ""
+                    });
+                }
+                showToast("Connected via Google!", "success");
+            } catch(err) { if(err.code !== 'auth/popup-closed-by-user') showToast("Google Login Failed", "error"); setLoader("", false); }
+        };
+        document.getElementById('btnGoogleLogin').onclick = handleGoogleAuth;
+        document.getElementById('btnGoogleSignup').onclick = handleGoogleAuth;
+
+        document.getElementById('btnForgotPass').onclick = async () => {
+            const email = document.getElementById('logEmail').value;
+            if(!email) return showToast("Enter your email first!", "error");
+            setLoader("Sending Reset Link...", true);
+            try { await sendPasswordResetEmail(auth, email); showToast("Password reset link sent to email", "success"); }
+            catch(err) { showToast("Email not found", "error"); }
+            setLoader("", false);
+        };
+
+        onAuthStateChanged(auth, async (user) => {
+            if(user) {
+                hide('loginSection'); hide('signupSection'); show('profileSection');
+                
+                const localData = localStorage.getItem("awaaz_user_data");
+                if(localData) updateProfileUI(JSON.parse(localData), user.email);
+
+                try {
+                    const docSnap = await getDoc(doc(db, "nodes", user.uid));
+                    if(docSnap.exists()) {
+                        updateProfileUI(docSnap.data(), user.email);
+                        localStorage.setItem("awaaz_user_data", JSON.stringify(docSnap.data())); 
+                    }
+                } catch(e) {}
+                setLoader("", false);
+            } else {
+                localStorage.removeItem("awaaz_user_data");
+                hide('profileSection'); show('loginSection');
+                setLoader("", false);
+            }
+        });
+
+        document.getElementById('btnLogout').onclick = () => {
+            setLoader("Signing Out...", true);
+            signOut(auth).then(() => { showToast("Signed Out Successfully", "success"); setLoader("", false); });
+        };
+    </script>
 </body>
 </html>
