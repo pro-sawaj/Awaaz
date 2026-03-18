@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     // Header, Sidebar aur Main Dashboard ko load karwa rahe hain
     await loadComponent('header-root', './components/layout/header.html');
     await loadComponent('sidebar-root', './components/layout/sidebar.html');
-    await loadComponent('main-root', './components/dashboard/main-feed.html');
+  //  await loadComponent('main-root', './components/dashboard/main-feed.html');
 
     // Page reload hone par check karo ki user ne last time dark mode select kiya tha ya nahi
     if (localStorage.getItem('theme') === 'dark') {
