@@ -1,0 +1,31 @@
+/* Google font import kar rahe hain */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+/* Sabhi elements ka default margin/padding zero kar rahe hain taaki design kharab na ho */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+/* Body ki global styling */
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Default Font */
+    background-color: #f8fafc; /* Light Mode Background */
+    color: #1e293b; /* Light Mode Text Color */
+    min-height: 100vh; /* Minimum height poori screen jitni hogi */
+    overflow-x: hidden; /* Screen ke bahar kuch jaye toh horizontal scroll na aaye */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Dark mode switch hone par smooth animation */
+}
+
+/* Global Dark Mode Base (Baaki har component apna dark mode khud handle karega) */
+body.dark-mode { 
+    background-color: #18191a; 
+    color: #e4e6eb; 
+}
+
+/* Main content ko header ke neeche se shuru karne ke liye padding de rahe hain */
+main { 
+    padding: 20px; 
+    margin-top: 85px; /* 85px header ki height hai */
+}
