@@ -1,0 +1,65 @@
+<style>
+    /* --- HEADER KI CSS --- */
+    .header { 
+        display: flex; justify-content: space-between; align-items: center; 
+        padding: 0 18px; background: #1e3a8a; 
+        position: fixed; top: 0; left: 0; width: 100%; height: 85px; 
+        z-index: 10000; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+    }
+    /* Header ke neeche gold line ka design */
+    .header::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #d4af37, #fde047); }
+    
+    /* Logo aur Text ki styling */
+    .brand-section { display: flex; align-items: center; gap: 12px; }
+    .logo-frame { width: 55px; height: 55px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; border: 2.5px solid #d4af37; overflow: hidden; position: relative; }
+    .logo-img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.4); width: 100%; height: 100%; object-fit: contain; }
+    .brand-title { font-size: 22px; font-weight: 800; color: #ffffff; line-height: 1.1; }
+    .brand-subtitle { font-size: 8px; font-weight: 800; color: #93c5fd; letter-spacing: 1.5px; margin-top: 2px; }
+    
+    /* Menu Button ki styling */
+    .icon-btn { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; color: #ffffff; cursor: pointer; }
+    .hamburger-line { width: 16px; height: 2px; background: #ffffff; border-radius: 2px; }
+    
+    /* Header Dark Mode Setup */
+    body.dark-mode .header { background-color: #242526; }
+</style>
+
+<header class="header">
+    <div class="brand-section">
+        <div class="logo-frame">
+            <img src="https://i.ibb.co/zV9wdhZr/IMG-20260317-202626.png" class="logo-img" alt="Logo">
+        </div>
+        <div class="brand-text">
+            <div class="brand-title">AWAAZ</div>
+            <div class="brand-subtitle">ECOSYSTEM PREMIUM</div>
+        </div>
+    </div>
+
+    <div class="header-icons">
+        <button class="icon-btn" onclick="openSidebar()">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+        </button>
+    </div>
+</header>
+
+<script>
+    // --- HEADER KI JAVASCRIPT ---
+    // window object mein isliye daala hai taaki baaki files se bhi ise call kiya ja sake
+    window.openSidebar = function() {
+        // Sidebar ki overlay aur panel dhundo aur unhe screen par le aao
+        const overlay = document.querySelector('.sidebar-overlay');
+        const panel = document.querySelector('.sidebar-panel');
+        
+        if (overlay) { 
+            overlay.style.pointerEvents = 'auto'; // Clicks allow karo
+            overlay.style.opacity = '1'; // Background dark karo
+        }
+        if (panel) {
+            panel.style.transform = 'translateX(0)'; // Panel ko screen ke andar slide karo
+        }
+    };
+</script>

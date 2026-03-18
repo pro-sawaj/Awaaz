@@ -1,0 +1,32 @@
+<style>
+    /* Dashboard Widget CSS */
+    .dashboard-widget {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+    
+    /* Dark Mode setup for Dashboard */
+    body.dark-mode .dashboard-widget {
+        background: #242526;
+        color: #e4e6eb;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+</style>
+
+<div class="dashboard-widget">
+    <h2>Welcome to Awaaz Ecosystem</h2>
+    <p style="margin-top: 10px; color: gray;">Aapka Main Feed Area load ho gaya hai. Yahan aap apna saara data dikha sakte hain.</p>
+    <button onclick="alertTest()" style="margin-top:15px; padding:10px 20px; background:#1e3a8a; color:white; border:none; border-radius:8px; cursor:pointer;">Test Button</button>
+</div>
+
+<script>
+    // Dashboard Logic
+    // Pata karne ke liye ki yeh file ki script theek se load hui hai ya nahi
+    window.alertTest = function() {
+        alert("Main Feed ki JavaScript perfectly kaam kar rahi hai!");
+    };
+    console.log("Main Feed Loaded Successfully!");
+</script>
