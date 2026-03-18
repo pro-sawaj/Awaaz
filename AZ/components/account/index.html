@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awaaz Global - Premium Auth</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader"><div class="spinner"></div><div id="loader-text">Loading Ecosystem...</div></div>
+    <div id="toast"><i class="fa-solid fa-circle-info"></i> <span id="toast-msg">Message</span></div>
+
+    <div id="customModal" class="custom-modal-overlay">
+        <div class="custom-modal-box">
+            <h3 id="modalTitle">Edit Detail</h3>
+            <input type="text" id="modalInput" class="custom-modal-input" placeholder="Type here...">
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" id="btnSaveModal">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="photoActionModal" class="custom-modal-overlay">
+        <div class="custom-modal-box" style="text-align: center;">
+            <h3 id="photoActionTitle" style="color: #64748b; font-size: 15px; margin-bottom: 20px;">Edit Photo</h3>
+            <button class="photo-action-btn btn-action-upload" onclick="triggerPhotoUpload()"><i class="fa-solid fa-upload"></i> Upload New Photo</button>
+            <button class="photo-action-btn btn-action-delete" id="btnActionDeletePhoto" onclick="triggerPhotoDelete()"><i class="fa-solid fa-trash"></i> Remove Photo</button>
+            <button class="btn-cancel" style="width: 100%; padding: 12px; border-radius: 12px; margin-top: 5px; font-weight: 600;" onclick="closePhotoMenu()">Cancel</button>
+        </div>
+    </div>
+    
+    <input type="file" id="sharedPhotoUpload" hidden accept="image/*">
+
+    <div class="container">
+        
+        <div id="loginSection" class="card">
+            <img src="https://i.ibb.co/zV9wdhZr/IMG-20260317-202626.png" alt="Awaaz Logo" class="brand-logo">
+            <h2>Welcome Back</h2>
+            <button class="btn-google" id="btnGoogleLogin"><img src="https://www.svgrepo.com/show/475656/google-color.svg"> Continue with Google</button>
+            <div class="divider">or login with email</div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="logEmail" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="logPass" placeholder="Password" required>
+                </div>
+                <span class="link forgot-pass" id="btnForgotPass">Forgot Password?</span>
+                <button type="submit" class="btn-primary">Secure Log In</button>
+            </form>
+            <span class="link" id="btnGoToSignup">New to Awaaz? Create Account</span>
+        </div>
+
+        <div id="signupSection" class="card hidden">
+            <img src="https://i.ibb.co/zV9wdhZr/IMG-20260317-202626.png" alt="Awaaz Logo" class="brand-logo">
+            <h2>Join Awaaz</h2>
+            <button class="btn-google" id="btnGoogleSignup"><img src="https://www.svgrepo.com/show/475656/google-color.svg"> Sign up with Google</button>
+            <div class="divider">or manual setup</div>
+            <form id="signupForm">
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="signName" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-calendar"></i>
+                    <input type="number" id="signAge" placeholder="Age" min="1" required>
+                </div>
+                <div class="gender-box">
+                    <label><input type="radio" name="gender" value="Male" checked><div class="gender-option"><i class="fa-solid fa-mars"></i> Male</div></label>
+                    <label><input type="radio" name="gender" value="Female"><div class="gender-option"><i class="fa-solid fa-venus"></i> Female</div></label>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="signEmail" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="signPass" placeholder="Set Strong Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+            <span class="link" id="btnGoToLogin">Already a member? Log In</span>
+        </div>
+
+        <div id="profileSection" class="card hidden">
+            <div class="cover-photo" id="coverPhotoBg">
+                <div class="cover-edit-btn" onclick="openPhotoMenu('cover')"><i class="fa-solid fa-pen"></i> Edit Cover</div>
+            </div>
+            
+            <div class="profile-content">
+                <div class="avatar-wrapper">
+                    <img src="https://via.placeholder.com/150/f8fafc/94a3b8?text=VIP" id="userPhoto">
+                    <div class="upload-btn" onclick="openPhotoMenu('profile')"><i class="fa-solid fa-camera"></i></div>
+                </div>
+                <h3 id="pHeaderName">Awaaz User <span><i class="fa-solid fa-circle-check"></i></span></h3>
+                <p class="email-text" id="pEmail">user@awaaz.com</p>
+
+                <div class="tab-menu">
+                    <button class="tab-btn active" onclick="switchTab('tab-personal', this)">Personal</button>
+                    <button class="tab-btn" onclick="switchTab('tab-shipping', this)">Shipping</button>
+                    <button class="tab-btn" onclick="switchTab('tab-business', this)">Business</button>
+                    <button class="tab-btn" onclick="switchTab('tab-social', this)">Social Links</button>
+                </div>
+
+                <div id="tab-personal" class="tab-content active">
+                    <div class="info-list">
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-phone"></i> Phone</span><span class="info-value empty" id="pPhone" onclick="editField('phone', 'Phone Number')">Add +</span></div>
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-calendar"></i> Age</span><span class="info-value" id="pAge" onclick="editField('age', 'Age')">25 Yrs</span></div>
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-mars-and-venus"></i> Gender</span><span class="info-value" id="pGender" onclick="editField('gender', 'Gender')">Male</span></div>
+                    </div>
+                </div>
+
+                <div id="tab-shipping" class="tab-content">
+                    <div class="info-list">
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-city"></i> City</span><span class="info-value empty" id="pCity" onclick="editField('city', 'City Name')">Add +</span></div>
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-location-dot"></i> Pincode</span><span class="info-value empty" id="pPincode" onclick="editField('pincode', 'Pincode')">Add +</span></div>
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-house"></i> Full Address</span><span class="info-value empty" id="pAddress" onclick="editField('address', 'Full Address')">Add +</span></div>
+                    </div>
+                </div>
+
+                <div id="tab-business" class="tab-content">
+                    <div class="info-list">
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-shield-halved"></i> KYC Status</span><span class="info-value"><span class="badge-verified"><i class="fa-solid fa-check"></i> Verified</span></span></div>
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-file-invoice"></i> GSTIN</span><span class="info-value empty" id="pGstin" onclick="editField('gstin', 'GSTIN Number')">Add +</span></div>
+                        <div class="info-item"><span class="info-label"><i class="fa-solid fa-globe"></i> Language</span><span class="info-value" id="pLang" onclick="editField('lang', 'Preferred Language')">English</span></div>
+                    </div>
+                </div>
+
+                <div id="tab-social" class="tab-content">
+                    <div class="info-list" style="padding: 15px;">
+                        <p class="section-desc">Tap an icon to link your profile</p>
+                        <div class="social-row">
+                            <div class="social-circle social-web" id="sWebsite" onclick="editField('website', 'Website URL')"><i class="fa-solid fa-globe"></i><div class="added-badge"><i class="fa-solid fa-check"></i></div></div>
+                            <div class="social-circle social-ig" id="sInstagram" onclick="editField('instagram', 'Instagram Username')"><i class="fa-brands fa-instagram"></i><div class="added-badge"><i class="fa-solid fa-check"></i></div></div>
+                            <div class="social-circle social-fb" id="sFacebook" onclick="editField('facebook', 'Facebook Profile Link')"><i class="fa-brands fa-facebook"></i><div class="added-badge"><i class="fa-solid fa-check"></i></div></div>
+                            <div class="social-circle social-tw" id="sTwitter" onclick="editField('twitter', 'Twitter (X) Username')"><i class="fa-brands fa-x-twitter"></i><div class="added-badge"><i class="fa-solid fa-check"></i></div></div>
+                            <div class="social-circle social-tg" id="sTelegram" onclick="editField('telegram', 'Telegram ID')"><i class="fa-brands fa-telegram"></i><div class="added-badge"><i class="fa-solid fa-check"></i></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btnLogout" class="btn-primary" style="background: #f1f5f9; color: #ef4444; box-shadow: none; border: 1px solid #e2e8f0;"><i class="fa-solid fa-power-off"></i> Sign Out</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
